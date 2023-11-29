@@ -48,7 +48,7 @@ const RegisterPage = () => {
       return;
     }
 
-    router.push("/login");
+    router.push("/dashboard");
   };
 
   return (
