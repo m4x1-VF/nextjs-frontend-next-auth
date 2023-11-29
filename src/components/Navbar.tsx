@@ -23,7 +23,10 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <button className="btn btn-primary btn-sm" onClick={() => signIn()}>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={async () => await signIn()}
+            >
               Login
             </button>
             <Link href="/register" className="btn btn-primary btn-sm">
