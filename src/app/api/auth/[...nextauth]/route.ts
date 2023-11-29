@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "email",
       credentials: {
         email: { label: "email", type: "email", placeholder: "test@test.com" },
         password: { label: "Password", type: "password" },
@@ -29,6 +30,18 @@ const handler = NextAuth({
         return user;
       },
     }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
@@ -39,9 +52,6 @@ const handler = NextAuth({
       session.user = token as any;
       return session;
     },
-  },
-  pages: {
-    signIn: "/login",
   },
 });
 

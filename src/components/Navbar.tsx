@@ -1,6 +1,6 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -23,9 +23,9 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link href="/login" className="btn btn-primary btn-sm">
+            <button className="btn btn-primary btn-sm" onClick={() => signIn()}>
               Login
-            </Link>
+            </button>
             <Link href="/register" className="btn btn-primary btn-sm">
               Register
             </Link>
